@@ -5,13 +5,9 @@ leftWristY=0;
 rightWristX=0;
 rightWristY=0;
 scoreLeftWrist=0;
-song_name = "";
-
-function preload()
-{
-    song = loadSound("music.mp3");
-    song1 = loadSound("music2.mp3");
-}
+scoreRightWrist=0;
+song_song = "";
+song_song1 = "";
 
 function setup()
 {
@@ -25,27 +21,10 @@ function setup()
     poseNet.on('pose', gotPoses);
 }
 
-function gotPoses(results)
+function preload()
 {
-    if(results.length > 0)
-    {
-        console.log(results);
-        scoreLeftWrist = results[0].pose.keypoints[9].score;
-
-
-        leftWristX = results[0].pose.leftWrist.x;
-        leftWristY = results[0].pose.leftWrist.y;
-        console.log(`Left Wrist X = ${leftWristX} \n\ Left Wrist Y = ${leftWristY}`);
-
-        rightWristX = results[0].pose.rightWrist.x;
-        rightWristY = results[0].pose.rightWrist.y;
-        console.log(`Right Wrist X = ${rightWristX} \n\ Right Wrist Y = ${rightWristY}`);
-    }
-}
-
-function modelLoaded()
-{
-    console.log("Model Loaded!");
+    song = loadSound("music.mp3");
+    song1 = loadSound("music2.mp3");
 }
 
 function draw()
@@ -55,17 +34,48 @@ function draw()
     fill("#ff0000");
     stroke("#ff0000");
 
-    song_name = song.isPlaying();
+    song_song = song.isPlaying();
+    console.log(song_song);
 
+    /* song_song1 = song1.isPlaying();
+    console.log(song_song1); */
+    
     if(scoreLeftWrist > 0.2)
     {
         circle(leftWrist_x, leftWrist_y, 20);
         song1.stop();
         
-        if(song == false)
+        if(song_song == false)
         {
             song.play();
-            document.getElementById("song_id").innerHTML = "Song Name - Song 1";
+            document.getElementById("song_name").innerHTML = "Song Name - Song 1";
         }
+    }
+}
+
+function modelLoaded()
+{
+    console.log("Model Loaded!");
+}
+
+function gotPoses(results)
+{
+    if(results.length > 0)
+    {
+        console.log(results);
+
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+        console.log(scoreleftWrist);
+
+        // scoreRightWrist = results[0].pose.keypoints[10].score;
+        // console.log(scoreRightWrist);
+
+        leftWristX = results[0].pose.leftWrist.x;
+        leftWristY = results[0].pose.leftWrist.y;
+        console.log(`Left Wrist X = ${leftWristX} Left Wrist Y = ${leftWristY}`);
+
+        rightWristX = results[0].pose.rightWrist.x;
+        rightWristY = results[0].pose.rightWrist.y;
+        console.log(`Right Wrist X = ${rightWristX} Right Wrist Y = ${rightWristY}`);
     }
 }
