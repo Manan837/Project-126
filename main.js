@@ -77,7 +77,7 @@ function gotPoses(results)
         console.log(results);
 
         scoreLeftWrist = results[0].pose.keypoints[9].score;
-        console.log(scoreleftWrist);
+        console.log(scoreLeftWrist);
 
         scoreRightWrist = results[0].pose.keypoints[10].score;
         console.log(scoreRightWrist);
