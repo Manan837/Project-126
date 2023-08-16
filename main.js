@@ -8,7 +8,6 @@ scoreLeftWrist=0;
 scoreRightWrist=0;
 song_song = "";
 song_song1 = "";
-w = "";
 
 function setup()
 {
