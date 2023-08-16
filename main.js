@@ -36,19 +36,31 @@ function draw()
 
     song_song = song.isPlaying();
     console.log(song_song);
-
-    /* song_song1 = song1.isPlaying();
-    console.log(song_song1); */
-    
+       
     if(scoreLeftWrist > 0.2)
     {
-        circle(leftWrist_x, leftWrist_y, 20);
+        circle(leftWristX, leftWristY, 20);
         song1.stop();
         
         if(song_song == false)
         {
             song.play();
             document.getElementById("song_name").innerHTML = "Song Name - Song 1";
+        }
+    }
+    
+    song_song1 = song1.isPlaying();
+    console.log(song_song1);
+
+    if(scoreRightWrist > 0.2)
+    {
+        circle(rightWristX, rightWristY, 20);
+        song.stop();
+
+        if (song_song1 == false)
+        {
+            song1.play();
+            document.getElementById("song_name").innerHTML = "Song Name - Song 2";
         }
     }
 }
@@ -67,8 +79,8 @@ function gotPoses(results)
         scoreLeftWrist = results[0].pose.keypoints[9].score;
         console.log(scoreleftWrist);
 
-        // scoreRightWrist = results[0].pose.keypoints[10].score;
-        // console.log(scoreRightWrist);
+        scoreRightWrist = results[0].pose.keypoints[10].score;
+        console.log(scoreRightWrist);
 
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
